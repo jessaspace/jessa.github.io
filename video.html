@@ -28,12 +28,15 @@
     }
 
     nav {
+      position: sticky;
+      top: 0;
       background-color: #f8d4dc;
       display: flex;
-      flex-wrap: wrap;
       justify-content: center;
+      flex-wrap: wrap;
       padding: 1rem;
       gap: 1.5rem;
+      z-index: 999;
     }
 
     nav a {
@@ -61,20 +64,15 @@
       color: var(--accent);
     }
 
-    .videos-section {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 2rem 1rem;
-    }
-
-    .videos-section h2 {
-      font-size: 2.5rem;
-      text-align: center;
-      margin-bottom: 1rem;
+    .section-title {
+      font-size: 2.2rem;
       color: var(--accent);
+      text-align: center;
+      margin-top: 3rem;
+      margin-bottom: 1rem;
     }
 
-    .videos-section p {
+    .section-desc {
       text-align: center;
       color: var(--muted);
       margin-bottom: 2rem;
@@ -84,6 +82,9 @@
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
       gap: 2rem;
+      padding: 0 1rem;
+      max-width: 1200px;
+      margin: 0 auto;
     }
 
     .video-card {
@@ -92,6 +93,9 @@
       overflow: hidden;
       box-shadow: 0 4px 10px var(--shadow);
       transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+      opacity: 0;
+      animation: fadeIn 0.8s ease forwards;
     }
 
     .video-card:hover {
@@ -99,18 +103,10 @@
       box-shadow: 0 8px 20px var(--shadow);
     }
 
-    .video-card iframe {
-      width: 100%;
-      height: 100%;
-      min-height: 200px;
-      border: none;
-    }
-
     .video-caption {
       padding: 1rem;
       text-align: center;
       font-weight: 500;
-      color: var(--primary);
     }
 
     footer {
@@ -121,13 +117,51 @@
       margin-top: 3rem;
     }
 
+    @keyframes fadeIn {
+      to {
+        opacity: 1;
+      }
+    }
+
+    .lightbox {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.8);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      display: none;
+    }
+
+    .lightbox iframe {
+      width: 90%;
+      height: 80%;
+      border: none;
+    }
+
+    .lightbox.active {
+      display: flex;
+    }
+
+    .lightbox-close {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      font-size: 2rem;
+      color: white;
+      cursor: pointer;
+    }
+
     @media (max-width: 768px) {
       header h1 {
         font-size: 2.2rem;
       }
-
-      .videos-section h2 {
-        font-size: 2rem;
+      .section-title {
+        font-size: 1.7rem;
       }
     }
   </style>
@@ -138,7 +172,7 @@
     <a href="index.html">Home</a>
     <a href="gallery.html">Gallery</a>
     <a href="demo.html">Demo Reel</a>
-    <a href="acting-videos.html">Acting Videos</a>
+    <a href="video.html">Acting Videos</a>
     <a href="contact.html">Contact</a>
   </nav>
 
@@ -146,24 +180,72 @@
     <h1>Jessa Fayer</h1>
   </header>
 
-  <section class="videos-section">
-    <h2>Acting Videos</h2>
-    <p>Watch select scenes, monologues, and demo performances from my portfolio.</p>
+  <!-- Reusable Lightbox -->
+  <div id="lightbox" class="lightbox">
+    <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
+    <iframe id="lightbox-video" src="" allowfullscreen></iframe>
+  </div>
 
+  <!-- DEMO -->
+  <section>
+    <h2 class="section-title">Demo Reel</h2>
+    <p class="section-desc">A quick glimpse into my versatility as an actress.</p>
     <div class="video-grid">
-      <div class="video-card">
-        <iframe src="https://www.youtube.com/embed/HeYSBT-acGk" allowfullscreen></iframe>
-        <div class="video-caption">Demo Reel</div>
+      <div class="video-card" onclick="openLightbox('https://www.youtube.com/embed/HeYSBT-acGk')">
+        <img src="https://img.youtube.com/vi/HeYSBT-acGk/hqdefault.jpg" alt="Demo Reel" style="width:100%;">
+        <div class="video-caption">Acting Demo Reel</div>
       </div>
+    </div>
+  </section>
 
-      <div class="video-card">
-        <iframe src="https://www.youtube.com/embed/TGPsjIvq1Zs" allowfullscreen></iframe>
+  <!-- MONOLOGUES -->
+  <section>
+    <h2 class="section-title">Monologues</h2>
+    <p class="section-desc">Emotional, comedic, and dramatic solo pieces.</p>
+    <div class="video-grid">
+      <div class="video-card" onclick="openLightbox('https://www.youtube.com/embed/PXbb0eWzBn8')">
+        <img src="https://img.youtube.com/vi/PXbb0eWzBn8/hqdefault.jpg" alt="Monologue 1" style="width:100%;">
+        <div class="video-caption">Preteen Crush Monologue</div>
+      </div>
+      <div class="video-card" onclick="openLightbox('https://www.youtube.com/embed/3f3G-PSCLuQ')">
+        <img src="https://img.youtube.com/vi/3f3G-PSCLuQ/hqdefault.jpg" alt="Monologue 2" style="width:100%;">
+        <div class="video-caption">High School Love Story</div>
+      </div>
+      <div class="video-card" onclick="openLightbox('https://www.youtube.com/embed/lCmvO9mwZRY')">
+        <img src="https://img.youtube.com/vi/lCmvO9mwZRY/hqdefault.jpg" alt="Monologue 3" style="width:100%;">
+        <div class="video-caption">Emotional Monologue</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMMERCIALS -->
+  <section>
+    <h2 class="section-title">Commercial Work</h2>
+    <p class="section-desc">Professional appearances in ads and branded content.</p>
+    <div class="video-grid">
+      <div class="video-card" onclick="openLightbox('https://www.youtube.com/embed/VIDEO_ID_4')">
+        <img src="https://img.youtube.com/vi/VIDEO_ID_4/hqdefault.jpg" alt="Commercial 1" style="width:100%;">
+        <div class="video-caption">Beauty Product Commercial</div>
+      </div>
+      <div class="video-card" onclick="openLightbox('https://www.youtube.com/embed/VIDEO_ID_5')">
+        <img src="https://img.youtube.com/vi/VIDEO_ID_5/hqdefault.jpg" alt="Commercial 2" style="width:100%;">
+        <div class="video-caption">Lifestyle Brand Ad</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CREATIVE PROJECTS -->
+  <section>
+    <h2 class="section-title">Creative Projects</h2>
+    <p class="section-desc">Unique roles and passion pieces from indie sets to horror scenes.</p>
+    <div class="video-grid">
+      <div class="video-card" onclick="openLightbox('https://www.youtube.com/embed/OG1tJRWNbds')">
+        <img src="https://img.youtube.com/vi/OG1tJRWNbds/hqdefault.jpg" alt="Short Film" style="width:100%;">
         <div class="video-caption">Scene from "Short Film Title"</div>
       </div>
-
-      <div class="video-card">
-        <iframe src="https://www.youtube.com/embed/YOUR_THIRD_VIDEO_ID" allowfullscreen></iframe>
-        <div class="video-caption">Character Monologue</div>
+      <div class="video-card" onclick="openLightbox('https://www.youtube.com/embed/G4sjvQ4kqa0')">
+        <img src="https://img.youtube.com/vi/G4sjvQ4kqa0/hqdefault.jpg" alt="Paranormal Scene" style="width:100%;">
+        <div class="video-caption">Scene from "Paranormal Activity"</div>
       </div>
     </div>
   </section>
@@ -172,5 +254,20 @@
     &copy; 2025 Jessa Fayer. All rights reserved.
   </footer>
 
+  <script>
+    function openLightbox(videoUrl) {
+      const lightbox = document.getElementById("lightbox");
+      const iframe = document.getElementById("lightbox-video");
+      iframe.src = videoUrl + "?autoplay=1";
+      lightbox.classList.add("active");
+    }
+
+    function closeLightbox() {
+      const lightbox = document.getElementById("lightbox");
+      const iframe = document.getElementById("lightbox-video");
+      iframe.src = "";
+      lightbox.classList.remove("active");
+    }
+  </script>
 </body>
 </html>
