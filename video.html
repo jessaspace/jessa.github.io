@@ -15,11 +15,7 @@
       --shadow: rgba(0, 0, 0, 0.1);
     }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
       font-family: 'Roboto', sans-serif;
@@ -28,141 +24,70 @@
     }
 
     nav {
-      position: sticky;
-      top: 0;
+      position: sticky; top: 0;
       background-color: #f8d4dc;
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      padding: 1rem;
-      gap: 1.5rem;
-      z-index: 999;
+      display: flex; justify-content: center; flex-wrap: wrap;
+      padding: 1rem; gap: 1.5rem; z-index: 999;
     }
-
     nav a {
-      color: #222;
-      text-decoration: none;
-      font-weight: bold;
-      padding: 0.5rem 1rem;
-      border-radius: 5px;
-      transition: background 0.3s ease;
+      color: #222; text-decoration: none; font-weight: bold;
+      padding: 0.5rem 1rem; border-radius: 5px; transition: background 0.3s ease;
     }
-
-    nav a:hover {
-      background-color: #ffdbe5;
-    }
+    nav a:hover { background-color: #ffdbe5; }
 
     header {
-      text-align: center;
-      padding: 4rem 1rem 2rem;
+      text-align: center; padding: 4rem 1rem 2rem;
       background: linear-gradient(to right, #ffe0eb, #fff9f9);
     }
-
     header h1 {
-      font-family: 'Parisienne', cursive;
-      font-size: 3rem;
-      color: var(--accent);
+      font-family: 'Parisienne', cursive; font-size: 3rem; color: var(--accent);
     }
 
     .section-title {
-      font-size: 2.2rem;
-      color: var(--accent);
-      text-align: center;
-      margin-top: 3rem;
-      margin-bottom: 1rem;
+      font-size: 2.2rem; color: var(--accent);
+      text-align: center; margin-top: 3rem; margin-bottom: 1rem;
     }
-
-    .section-desc {
-      text-align: center;
-      color: var(--muted);
-      margin-bottom: 2rem;
-    }
+    .section-desc { text-align: center; color: var(--muted); margin-bottom: 2rem; }
 
     .video-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-      gap: 2rem;
-      padding: 0 1rem;
-      max-width: 1200px;
-      margin: 0 auto;
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 2rem; padding: 0 1rem; max-width: 1200px; margin: 0 auto;
     }
-
     .video-card {
-      background-color: var(--card-bg);
-      border-radius: 12px;
-      overflow: hidden;
+      background-color: var(--card-bg); border-radius: 12px; overflow: hidden;
       box-shadow: 0 4px 10px var(--shadow);
       transition: transform 0.3s ease, box-shadow 0.3s ease;
-      cursor: pointer;
-      opacity: 0;
-      animation: fadeIn 0.8s ease forwards;
+      cursor: pointer; opacity: 0; animation: fadeIn 0.8s ease forwards;
     }
+    .video-card:hover { transform: translateY(-5px); box-shadow: 0 8px 20px var(--shadow); }
+    .video-card img { display:block; width:100%; height:auto; }
+    .video-caption { padding: 1rem; text-align: center; font-weight: 500; }
 
-    .video-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 8px 20px var(--shadow);
-    }
+    footer { text-align: center; padding: 2rem 1rem; color: var(--muted); background: #f7f7f7; margin-top: 3rem; }
 
-    .video-caption {
-      padding: 1rem;
-      text-align: center;
-      font-weight: 500;
-    }
+    @keyframes fadeIn { to { opacity: 1; } }
 
-    footer {
-      text-align: center;
-      padding: 2rem 1rem;
-      color: var(--muted);
-      background: #f7f7f7;
-      margin-top: 3rem;
-    }
-
-    @keyframes fadeIn {
-      to {
-        opacity: 1;
-      }
-    }
-
+    /* Lightbox */
     .lightbox {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
+      position: fixed; inset: 0;
       background-color: rgba(0, 0, 0, 0.8);
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      display: none; align-items: center; justify-content: center;
       z-index: 9999;
-      display: none;
     }
-
+    .lightbox.active { display: flex; }
     .lightbox iframe {
-      width: 90%;
-      height: 80%;
-      border: none;
+      width: 90%; height: 80%; border: none; border-radius: 8px; box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+      background: #000;
     }
-
-    .lightbox.active {
-      display: flex;
-    }
-
     .lightbox-close {
-      position: absolute;
-      top: 20px;
-      right: 30px;
-      font-size: 2rem;
-      color: white;
-      cursor: pointer;
+      position: absolute; top: 20px; right: 30px;
+      font-size: 2rem; color: white; cursor: pointer;
     }
 
     @media (max-width: 768px) {
-      header h1 {
-        font-size: 2.2rem;
-      }
-      .section-title {
-        font-size: 1.7rem;
-      }
+      header h1 { font-size: 2.2rem; }
+      .section-title { font-size: 1.7rem; }
+      .lightbox iframe { width: 95%; height: 55vh; }
     }
   </style>
 </head>
@@ -181,9 +106,9 @@
   </header>
 
   <!-- Reusable Lightbox -->
-  <div id="lightbox" class="lightbox">
-    <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
-    <iframe id="lightbox-video" src="" allowfullscreen></iframe>
+  <div id="lightbox" class="lightbox" aria-hidden="true" role="dialog" aria-label="Video viewer">
+    <span class="lightbox-close" role="button" tabindex="0" aria-label="Close video">&times;</span>
+    <iframe id="lightbox-video" src="" allow="autoplay; encrypted-media" allowfullscreen title="Video player"></iframe>
   </div>
 
   <!-- DEMO -->
@@ -191,9 +116,44 @@
     <h2 class="section-title">Demo Reel</h2>
     <p class="section-desc">A quick glimpse into my versatility as an actress.</p>
     <div class="video-grid">
-      <div class="video-card" onclick="openLightbox('https://www.youtube.com/embed/HeYSBT-acGk')">
-        <img src="https://img.youtube.com/vi/HeYSBT-acGk/hqdefault.jpg" alt="Demo Reel" style="width:100%;">
+      <div class="video-card" onclick="openLightbox('https://youtu.be/LSd-2pcCkAA')">
+        <img loading="lazy" src="https://img.youtube.com/vi/LSd-2pcCkAA/hqdefault.jpg" alt="Acting Demo Reel thumbnail">
         <div class="video-caption">Acting Demo Reel</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMMERCIALS -->
+  <section>
+    <h2 class="section-title">Commercial Work</h2>
+    <p class="section-desc">Professional appearances in advertisements and branded content.</p>
+    <div class="video-grid">
+      <div class="video-card" onclick="openLightbox('https://youtu.be/Fv64X6hZw8Q?si=-yU5nFUtSs7SrKAm')">
+        <img loading="lazy" src="https://img.youtube.com/vi/Fv64X6hZw8Q/hqdefault.jpg" alt="Romantic Commercial thumbnail">
+        <div class="video-caption">Romantic Commercial</div>
+      </div>
+
+      <!-- Example second commercial (replace VIDEO_ID_5 with your actual ID) -->
+      <div class="video-card" onclick="openLightbox('https://youtu.be/VIDEO_ID_5')">
+        <img loading="lazy" src="https://img.youtube.com/vi/VIDEO_ID_5/hqdefault.jpg" alt="Lifestyle Brand Ad thumbnail">
+        <div class="video-caption">Lifestyle Brand Ad</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CREATIVE PROJECTS -->
+  <section>
+    <h2 class="section-title">Creative Projects</h2>
+    <p class="section-desc">Original roles and passion pieces from the indie horror scene that I wrote, directed, and starred in.</p>
+    <div class="video-grid">
+      <div class="video-card" onclick="openLightbox('https://youtu.be/Lsx3GUTxGBI')">
+        <img loading="lazy" src="https://img.youtube.com/vi/Lsx3GUTxGBI/hqdefault.jpg" alt="Scene from 'It’s Only the Beginning' thumbnail">
+        <div class="video-caption">Scene from "It’s Only the Beginning"</div>
+      </div>
+
+      <div class="video-card" onclick="openLightbox('https://youtu.be/axvDiCZUEeY')">
+        <img loading="lazy" src="https://img.youtube.com/vi/axvDiCZUEeY/hqdefault.jpg" alt="Scene from 'Bad Apple' thumbnail">
+        <div class="video-caption">Scene from "Bad Apple"</div>
       </div>
     </div>
   </section>
@@ -203,49 +163,20 @@
     <h2 class="section-title">Monologues</h2>
     <p class="section-desc">Emotional, comedic, and dramatic solo pieces.</p>
     <div class="video-grid">
-      <div class="video-card" onclick="openLightbox('https://www.youtube.com/embed/PXbb0eWzBn8')">
-        <img src="https://img.youtube.com/vi/PXbb0eWzBn8/hqdefault.jpg" alt="Monologue 1" style="width:100%;">
-        <div class="video-caption">Preteen Crush Monologue</div>
+      <div class="video-card" onclick="openLightbox('https://youtu.be/Z3x-Z_Ij1aM')">
+        <img loading="lazy" src="https://img.youtube.com/vi/Z3x-Z_Ij1aM/hqdefault.jpg" alt="Vulnerable Teen Monologue thumbnail">
+        <div class="video-caption">You Know I Don’t Do This Kind Of Thing – A Vulnerable Teen Monologue</div>
       </div>
-      <div class="video-card" onclick="openLightbox('https://www.youtube.com/embed/3f3G-PSCLuQ')">
-        <img src="https://img.youtube.com/vi/3f3G-PSCLuQ/hqdefault.jpg" alt="Monologue 2" style="width:100%;">
+
+      <!-- Placeholder cards — add your links when ready -->
+      <div class="video-card" onclick="openLightbox('https://youtu.be/VIDEO_ID_2')">
+        <img loading="lazy" src="https://img.youtube.com/vi/VIDEO_ID_2/hqdefault.jpg" alt="High School Love Story monologue thumbnail">
         <div class="video-caption">High School Love Story</div>
       </div>
-      <div class="video-card" onclick="openLightbox('https://www.youtube.com/embed/lCmvO9mwZRY')">
-        <img src="https://img.youtube.com/vi/lCmvO9mwZRY/hqdefault.jpg" alt="Monologue 3" style="width:100%;">
+
+      <div class="video-card" onclick="openLightbox('https://youtu.be/VIDEO_ID_3')">
+        <img loading="lazy" src="https://img.youtube.com/vi/VIDEO_ID_3/hqdefault.jpg" alt="Emotional Monologue thumbnail">
         <div class="video-caption">Emotional Monologue</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- COMMERCIALS -->
-  <section>
-    <h2 class="section-title">Commercial Work</h2>
-    <p class="section-desc">Professional appearances in ads and branded content.</p>
-    <div class="video-grid">
-      <div class="video-card" onclick="openLightbox('https://www.youtube.com/embed/VIDEO_ID_4')">
-        <img src="https://img.youtube.com/vi/VIDEO_ID_4/hqdefault.jpg" alt="Commercial 1" style="width:100%;">
-        <div class="video-caption">Beauty Product Commercial</div>
-      </div>
-      <div class="video-card" onclick="openLightbox('https://www.youtube.com/embed/VIDEO_ID_5')">
-        <img src="https://img.youtube.com/vi/VIDEO_ID_5/hqdefault.jpg" alt="Commercial 2" style="width:100%;">
-        <div class="video-caption">Lifestyle Brand Ad</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- CREATIVE PROJECTS -->
-  <section>
-    <h2 class="section-title">Creative Projects</h2>
-    <p class="section-desc">Unique roles and passion pieces from indie sets to horror scenes.</p>
-    <div class="video-grid">
-      <div class="video-card" onclick="openLightbox('https://www.youtube.com/embed/OG1tJRWNbds')">
-        <img src="https://img.youtube.com/vi/OG1tJRWNbds/hqdefault.jpg" alt="Short Film" style="width:100%;">
-        <div class="video-caption">Scene from "Short Film Title"</div>
-      </div>
-      <div class="video-card" onclick="openLightbox('https://www.youtube.com/embed/G4sjvQ4kqa0')">
-        <img src="https://img.youtube.com/vi/G4sjvQ4kqa0/hqdefault.jpg" alt="Paranormal Scene" style="width:100%;">
-        <div class="video-caption">Scene from "Paranormal Activity"</div>
       </div>
     </div>
   </section>
@@ -255,19 +186,58 @@
   </footer>
 
   <script>
+    // Extract a YouTube video ID from common URL formats
+    function getYouTubeId(url) {
+      try {
+        const u = new URL(url);
+        if (u.hostname.includes('youtu.be')) {
+          return u.pathname.slice(1);
+        }
+        if (u.hostname.includes('youtube.com')) {
+          if (u.pathname === '/watch') return u.searchParams.get('v');
+          const parts = u.pathname.split('/');
+          const i = parts.indexOf('embed');
+          if (i !== -1 && parts[i+1]) return parts[i+1];
+        }
+      } catch (e) {}
+      // fallback: assume already a plain ID
+      return url;
+    }
+
     function openLightbox(videoUrl) {
-      const lightbox = document.getElementById("lightbox");
-      const iframe = document.getElementById("lightbox-video");
-      iframe.src = videoUrl + "?autoplay=1";
-      lightbox.classList.add("active");
+      const lightbox = document.getElementById('lightbox');
+      const iframe = document.getElementById('lightbox-video');
+      const id = getYouTubeId(videoUrl);
+      const embed = `https://www.youtube.com/embed/${id}?autoplay=1&rel=0`;
+      iframe.src = embed;
+      lightbox.classList.add('active');
+      lightbox.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
     }
 
     function closeLightbox() {
-      const lightbox = document.getElementById("lightbox");
-      const iframe = document.getElementById("lightbox-video");
-      iframe.src = "";
-      lightbox.classList.remove("active");
+      const lightbox = document.getElementById('lightbox');
+      const iframe = document.getElementById('lightbox-video');
+      iframe.src = '';
+      lightbox.classList.remove('active');
+      lightbox.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
     }
+
+    // Close on backdrop click
+    document.getElementById('lightbox').addEventListener('click', (e) => {
+      if (e.target.id === 'lightbox') closeLightbox();
+    });
+
+    // Close on ESC
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeLightbox();
+    });
+
+    // Close button keyboard support
+    document.querySelector('.lightbox-close').addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') closeLightbox();
+    });
   </script>
 </body>
 </html>
