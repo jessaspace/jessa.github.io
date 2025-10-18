@@ -1,128 +1,370 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <!-- Essentials -->
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <title>Jessa Fayer – Actress & Model</title>
+  <meta name="description" content="Jessa Fayer — Film & TV actress and print model. Explore demo reel, acting videos, gallery, and contact information." />
+
+  <!-- SEO / Social -->
+  <meta property="og:title" content="Jessa Fayer – Actress & Model" />
+  <meta property="og:description" content="Explore demo reel, acting videos, gallery, and contact information." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://your-domain.com/" />
+  <meta property="og:image" content="https://your-domain.com/og-image.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" href="/favicon.ico" />
+
+  <!-- Fonts (system-first fallback for speed) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Parisienne&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
   <style>
     :root {
-      --pink: #f8d4dc;
-      --gray: #f0f0f0;
-      --black: #222;
+      --pink: #f8d4dc;         /* brand background */
+      --pink-200: #ffdbe5;     /* hover */
+      --gray: #f6f6f7;         /* page bg */
+      --black: #1f1f1f;        /* primary text */
+      --muted: #6b6b6b;        /* secondary text */
+      --card: #ffffff;
+      --shadow: 0 10px 25px rgba(0,0,0,.08);
+      --radius: 14px;
+
+      --container: 1120px;
+      --pad: 1.25rem;
     }
+
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
 
     body {
       margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background-color: var(--gray);
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background: var(--gray);
       color: var(--black);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
     }
 
-    nav {
-      background-color: var(--pink);
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 1.5rem;
-      padding: 1rem;
+    a { color: inherit; text-decoration: none; }
+
+    .container {
+      width: 100%;
+      max-width: var(--container);
+      margin: 0 auto;
+      padding-inline: var(--pad);
     }
 
-    nav a {
-      color: var(--black);
-      text-decoration: none;
-      font-weight: bold;
-      padding: 0.5rem 1rem;
-      border-radius: 5px;
-      transition: background 0.3s ease;
+    /* NAV */
+    .nav {
+      position: sticky; top: 0; z-index: 50;
+      background: var(--pink);
+      border-bottom: 1px solid rgba(0,0,0,.05);
+      backdrop-filter: saturate(140%) blur(6px);
+    }
+    .nav-inner {
+      display: flex; align-items: center; justify-content: space-between;
+      min-height: 64px;
+    }
+    .brand {
+      display: flex; align-items: baseline; gap: .5rem;
+      font-weight: 700;
+    }
+    .brand .script { font-family: "Parisienne", cursive; font-size: 1.6rem; }
+    .brand .role { color: var(--muted); font-weight: 600; font-size: .95rem; }
+
+    .nav-links {
+      display: flex; gap: .5rem; align-items: center;
+    }
+    .nav-links a {
+      padding: .55rem .9rem; border-radius: 8px; font-weight: 600;
+      transition: background .2s ease;
+    }
+    .nav-links a:hover,
+    .nav-links a[aria-current="page"] {
+      background: var(--pink-200);
     }
 
-    nav a:hover {
-      background-color: #ffdbe5;
+    /* Mobile menu */
+    .nav-toggle {
+      display: none;
+      background: transparent; border: 0; padding: .5rem; margin-left: .5rem;
+      border-radius: 8px; cursor: pointer;
+    }
+    .nav-toggle:focus-visible { outline: 2px solid #000; outline-offset: 2px; }
+
+    @media (max-width: 840px) {
+      .nav-links { display: none; }
+      .nav-toggle { display: inline-flex; }
+      .nav.is-open .nav-links {
+        display: flex; flex-direction: column; gap: .25rem;
+        position: absolute; left: 0; right: 0; top: 64px;
+        background: var(--pink); padding: .5rem var(--pad) 1rem;
+        border-bottom: 1px solid rgba(0,0,0,.06);
+      }
     }
 
+    /* HERO */
     .hero {
-      background: linear-gradient(to right, #f8d4dc, #fff);
-      color: var(--black);
-      padding: 5rem 2rem;
-      text-align: center;
+      background: linear-gradient(90deg, var(--pink) 0%, #fff 100%);
+      padding: clamp(3rem, 6vw, 6rem) 0;
+      border-bottom: 1px solid rgba(0,0,0,.04);
     }
-
+    .hero-inner {
+      display: grid; gap: 2rem; align-items: center;
+      grid-template-columns: 1.2fr .8fr;
+    }
     .hero h1 {
-      font-size: 3rem;
-      margin-bottom: 1rem;
+      font-family: "Parisienne", cursive;
+      font-size: clamp(2.2rem, 4.8vw, 4rem);
+      line-height: 1.1; margin: 0 0 .5rem;
+      color: #e04f86;
+      text-shadow: 0 1px 0 rgba(255,255,255,.6);
     }
-
     .hero p {
-      font-size: 1.2rem;
-      max-width: 700px;
-      margin: 0 auto 2rem;
+      color: var(--black);
+      font-size: clamp(1rem, 1.4vw, 1.15rem);
+      max-width: 46ch;
+      margin: 0 0 1.25rem;
     }
+    .cta-row { display: flex; gap: .75rem; flex-wrap: wrap; }
 
     .btn {
-      background-color: var(--black);
-      color: var(--pink);
-      padding: 0.8rem 2rem;
-      border: none;
-      border-radius: 5px;
-      font-size: 1rem;
-      font-weight: bold;
-      cursor: pointer;
-      text-decoration: none;
-      transition: background 0.3s ease;
+      display: inline-flex; align-items: center; justify-content: center; gap: .5rem;
+      background: var(--black); color: var(--pink);
+      padding: .8rem 1.2rem; border: 0; border-radius: 10px;
+      font-weight: 700; letter-spacing: .2px; cursor: pointer;
+      box-shadow: var(--shadow);
+      transition: transform .18s ease, opacity .2s ease, background .2s ease;
+    }
+    .btn:hover { transform: translateY(-1px); background: #2a2a2a; }
+    .btn.secondary { background: #fff; color: var(--black); border: 1px solid rgba(0,0,0,.08); }
+    .btn.secondary:hover { background: #fefefe; }
+
+    .hero-card {
+      background: var(--card); border-radius: var(--radius); box-shadow: var(--shadow);
+      padding: 1.25rem; display: grid; gap: .75rem; align-self: stretch;
+    }
+    .hero-card h3 { margin: 0; font-size: 1rem; color: var(--muted); text-transform: uppercase; letter-spacing: .08em; }
+    .hero-card .grid {
+      display: grid; grid-template-columns: repeat(2, 1fr); gap: .75rem;
+    }
+    .tile {
+      border: 1px solid rgba(0,0,0,.06); border-radius: 12px; padding: .9rem;
+      display: grid; gap: .35rem; background: #fff;
+      transition: transform .18s ease, box-shadow .18s ease;
+    }
+    .tile:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+    .tile .kicker { font-size: .75rem; color: var(--muted); }
+    .tile .title { font-weight: 700; }
+
+    @media (max-width: 1024px) {
+      .hero-inner { grid-template-columns: 1fr; }
     }
 
-    .btn:hover {
-      background-color: #333;
+    /* SECTIONS */
+    .section {
+      padding: clamp(2.25rem, 5vw, 3.5rem) 0;
+    }
+    .section h2 {
+      text-align: center; font-size: clamp(1.6rem, 3.2vw, 2.2rem);
+      color: #e04f86; margin: 0 0 .5rem; font-weight: 700;
+    }
+    .section p.lead {
+      text-align: center; color: var(--muted); margin: 0 auto 1.5rem; max-width: 60ch;
     }
 
+    .cards {
+      display: grid; gap: 1.25rem;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    }
+    .card {
+      background: var(--card); border: 1px solid rgba(0,0,0,.06);
+      border-radius: var(--radius); padding: 1.25rem; box-shadow: var(--shadow);
+      display: grid; gap: .5rem;
+    }
+    .card h3 { margin: 0; font-size: 1.1rem; }
+    .card p { margin: 0; color: var(--muted); }
+
+    /* FOOTER */
     footer {
-      text-align: center;
-      padding: 1rem;
-      background-color: var(--black);
-      color: var(--pink);
-      margin-top: 3rem;
+      background: var(--black); color: var(--pink);
+      padding: 1.2rem 0; margin-top: 2rem;
     }
+    .foot-inner {
+      display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .social {
+      display: flex; gap: .5rem; align-items: center;
+    }
+    .social a {
+      display: inline-flex; width: 36px; height: 36px; align-items: center; justify-content: center;
+      background: rgba(255,255,255,.06); border-radius: 9px;
+      transition: background .2s ease, transform .18s ease;
+    }
+    .social a:hover { background: rgba(255,255,255,.14); transform: translateY(-1px); }
 
-    @media (max-width: 600px) {
-      .hero h1 {
-        font-size: 2.2rem;
-      }
-
-      .hero p {
-        font-size: 1rem;
-      }
-
-      nav {
-        gap: 1rem;
-        padding: 0.75rem;
-      }
-
-      .btn {
-        padding: 0.6rem 1.5rem;
-        font-size: 0.95rem;
-      }
+    /* Motion safety */
+    @media (prefers-reduced-motion: reduce) {
+      .btn, .tile { transition: none; }
     }
   </style>
 </head>
 <body>
 
-  <nav>
-    <a href="index.html">Home</a>
-    <a href="gallery.html">Gallery</a>
-    <a href="video.html">Demo Reel</a>
-    <a href="acting-videos.html">Acting Videos</a>
-    <a href="contact.html">Contact</a>
-  </nav>
+  <!-- NAV -->
+  <header class="nav" id="site-nav">
+    <div class="container nav-inner">
+      <a class="brand" href="index.html" aria-label="Jessa Fayer home">
+        <span class="script">Jessa Fayer</span>
+        <span class="role">Actress • Model</span>
+      </a>
 
+      <nav class="nav-links" aria-label="Primary">
+        <a href="index.html" aria-current="page">Home</a>
+        <a href="gallery.html">Gallery</a>
+        <a href="demo.html">Demo Reel</a>
+        <a href="acting-videos.html">Acting Videos</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+
+      <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+        <!-- Simple hamburger -->
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- HERO -->
   <section class="hero">
-    <h1>Jessa Fayer</h1>
-    <p>Film & TV Actress | Print Model<br>Explore my latest projects, reels, and portfolio.</p>
-    <a class="btn" href="gallery.html">View Gallery</a>
+    <div class="container hero-inner">
+      <div>
+        <h1>Jessa Fayer</h1>
+        <p>Film & TV Actress • Print Model. Explore my latest projects, demo reel, and curated gallery. Available for commercial, narrative, and UGC collaborations.</p>
+        <div class="cta-row">
+          <a class="btn" href="demo.html">Watch Demo Reel</a>
+          <a class="btn secondary" href="contact.html">Contact / Booking</a>
+        </div>
+      </div>
+
+      <aside class="hero-card" aria-label="Highlights">
+        <h3>Highlights</h3>
+        <div class="grid">
+          <a class="tile" href="acting-videos.html">
+            <span class="kicker">Featured</span>
+            <span class="title">Acting Videos</span>
+          </a>
+          <a class="tile" href="gallery.html">
+            <span class="kicker">Portfolio</span>
+            <span class="title">Modeling Gallery</span>
+          </a>
+          <a class="tile" href="demo.html">
+            <span class="kicker">Quick Look</span>
+            <span class="title">Demo Reel</span>
+          </a>
+          <a class="tile" href="contact.html">
+            <span class="kicker">Inquiries</span>
+            <span class="title">Contact & Reps</span>
+          </a>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- QUICK SECTIONS -->
+  <section class="section">
+    <div class="container">
+      <h2>Latest Work</h2>
+      <p class="lead">A snapshot of current projects across film, commercials, and indie horror.</p>
+      <div class="cards">
+        <article class="card">
+          <h3>Commercial – Romantic Spot</h3>
+          <p>Brand placement with nuanced, intimate delivery. See the :30 cut in Acting Videos.</p>
+        </article>
+        <article class="card">
+          <h3>Indie Horror – “It’s Only the Beginning”</h3>
+          <p>Wrote, directed, and starred. Moody character piece with creeping dread and visual storytelling.</p>
+        </article>
+        <article class="card">
+          <h3>Monologue – “Depression”</h3>
+          <p>Grounded performance exploring isolation and resilience. Now live on YouTube.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="cta-title">
+    <div class="container">
+      <h2 id="cta-title">Let’s Work Together</h2>
+      <p class="lead">Based in the U.S., open to travel. Seeking film/TV, commercial, and UGC collaborations.</p>
+      <div class="cta-row" style="justify-content:center; margin-top:.5rem;">
+        <a class="btn" href="contact.html">Contact & Availability</a>
+        <a class="btn secondary" href="acting-videos.html">View Acting Videos</a>
+      </div>
+    </div>
   </section>
 
   <footer>
-    &copy; 2025 Jessa Fayer | All rights reserved
+    <div class="container foot-inner">
+      <small>&copy; 2025 Jessa Fayer • All rights reserved</small>
+      <div class="social" aria-label="Social links">
+        <a href="https://youtube.com/@YOUR_HANDLE" aria-label="YouTube">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M23.5 6.2a4 4 0 0 0-2.8-2.8C18.9 3 12 3 12 3s-6.9 0-8.7.4A4 4 0 0 0 .5 6.2 41.6 41.6 0 0 0 0 12a41.6 41.6 0 0 0 .5 5.8 4 4 0 0 0 2.8 2.8C5.1 21 12 21 12 21s6.9 0 8.7-.4a4 4 0 0 0 2.8-2.8A41.6 41.6 0 0 0 24 12a41.6 41.6 0 0 0-.5-5.8ZM9.8 15.5v-7l6 3.5-6 3.5Z"/>
+          </svg>
+        </a>
+        <a href="https://www.instagram.com/jessacheers" aria-label="Instagram">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5Zm0 2a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3H7Zm5 3.5a5.5 5.5 0 1 1 0 11 5.5 5.5 0 0 1 0-11Zm6-1a1 1 0 1 1 0 2 1 1 0 0 1 0-2Z"/>
+          </svg>
+        </a>
+        <a href="mailto:jessafayercastings@gmail.com" aria-label="Email">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2Zm0 4-8 5L4 8V6l8 5 8-5v2Z"/>
+          </svg>
+        </a>
+      </div>
+    </div>
   </footer>
 
+  <script>
+    // Mobile nav toggle
+    const nav = document.getElementById('site-nav');
+    const toggle = document.querySelector('.nav-toggle');
+    const links = document.querySelector('.nav-links');
+
+    toggle.addEventListener('click', () => {
+      const open = nav.classList.toggle('is-open');
+      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+
+    // Close mobile menu on link click (optional)
+    links.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => {
+        nav.classList.remove('is-open');
+        toggle.setAttribute('aria-expanded', 'false');
+      });
+    });
+  </script>
+
+  <!-- Basic JSON-LD Person schema (update URLs as needed) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Jessa Fayer",
+    "jobTitle": "Actress & Model",
+    "url": "https://your-domain.com/",
+    "sameAs": [
+      "https://www.instagram.com/jessacheers",
+      "https://resumes.actorsaccess.com/Jessafayer",
+      "https://app.castingnetworks.com/talent/public-profile/jessafayer"
+    ]
+  }
+  </script>
 </body>
 </html>
